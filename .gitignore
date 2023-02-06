@@ -32,8 +32,8 @@ build/
 ### VS Code ###
 .vscode/
 
-### ignore application.properties ###
-!**/src/main/resources/application.properties
+### ignore application.properties in backend folder ###
+backend/src/main/resources/application.properties
 
 # ignore DS_Store
 .DS_Store/
