@@ -34,3 +34,6 @@ build/
 
 ### ignore application.properties ###
 !**/src/main/resources/application.properties
+
+# ignore DS_Store
+.DS_Store
