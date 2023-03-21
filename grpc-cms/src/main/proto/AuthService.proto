@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.olow.grpccms.grpccms.grpc";
+option java_outer_classname = "AuthServiceProto";
+option go_package = "login-service-go/authservice";
+package authservice;
+
+// The greeting service definition.
+service AuthService {
+  // Sends a greeting
+  rpc Login (LoginRequest) returns (LoginResponse) {}
+  rpc Register (RegisterRequest) returns (RegisterResponse) {}
+}
+
+// The request message containing the user's name.
+message LoginRequest {
+  string email = 1;
+  string password = 2;
+}
+
+// The response message containing the greetings
+message LoginResponse {
+  string token = 1;
+}
+
+message RegisterRequest {
+  string username = 1;
+  string password = 2;
+  string email = 3;
+}
+
+message RegisterResponse {
+  string message = 1;
+}
