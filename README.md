@@ -13,7 +13,7 @@ We are planning to develop an easy-to-use content management system (CMS) that w
 - <strong>analytic-service-js</strong>: The analytic service of the project. It is written in JavaScript and uses gRPC for communication with the server. It's generated using the gRPC-Node plugin.
 - <strong>cms-client-app</strong>: This is the frontend of the project, it's using Nextjs and will be using all the services to provide a complete CMS experience.
 
-![Image description](./images/custom.png)
+![Image description](./images/img.png)
 
 
 ### Why gRPC?
