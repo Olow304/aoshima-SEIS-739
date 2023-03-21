@@ -13,6 +13,9 @@ We are planning to develop an easy-to-use content management system (CMS) that w
 - <strong>analytic-service-js</strong>: The analytic service of the project. It is written in JavaScript and uses gRPC for communication with the server. It's generated using the gRPC-Node plugin.
 - <strong>cms-client-app</strong>: This is the frontend of the project, it's using Nextjs and will be using all the services to provide a complete CMS experience.
 
+![Image description](./images/diagram.png)
+
+
 ### Why gRPC?
 gRPC is a modern open source high performance RPC framework that can run in any environment. It can efficiently connect services in and across data centers with pluggable support for load balancing, tracing, health checking and authentication. It is also a flexible framework that can be used in many different environments: from clients to servers to in-process communication between applications. It is also a great tool for microservices architecture.
 
