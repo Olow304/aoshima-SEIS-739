@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.olow.grpc-cms</groupId>
-	<artifactId>grpc-cms</artifactId>
+	<artifactId>grpc-cms-server-java</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>grpc-cms</name>
 	<description>gRPC cms service</description>
