@@ -31,6 +31,8 @@ const client = new protoDesc.analyticservice.AnalyticService('localhost:9090', g
 
 function getPostCount(token) {
     return new Promise((resolve, reject) => {
+        // here we are calling grpc 'getPostCount' method that's defined in our proto file and implemented in our server in Java
+        // how amazing is that? we can call a method implemented in Java from NodeJS!
         client.getPostCount({}, { token }, (error, response) => {
             if (error) {
                 reject(error);
@@ -41,12 +43,10 @@ function getPostCount(token) {
     });
 }
 
-function getPostViews(postId, token) {
+function getPostViews(post_id, token) {
     return new Promise((resolve, reject) => {
-        // const request = new protoDesc.analyticservice.GetPostViewsRequest();
-        // request.setPostId(postId);
-
-        client.GetPostViews({post_id: postId}, { token }, (error, response) => {
+        // here we are calling grpc 'getPostViews' method that's defined in our proto file and implemented in our server in Java
+        client.getPostViews({ post_id }, { token }, (error, response) => {
             if (error) {
                 reject(error);
             } else {
