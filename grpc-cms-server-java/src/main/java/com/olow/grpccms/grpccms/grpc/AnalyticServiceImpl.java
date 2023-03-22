@@ -26,6 +26,7 @@ public class AnalyticServiceImpl extends AnalyticServiceGrpc.AnalyticServiceImpl
         String val = idStr.substring(idStr.indexOf(":") + 1).trim();
         System.out.println( "id: " + val);
         String valWithoutQuotes = val.replace("\"", "");
+
         Long id = Long.valueOf(valWithoutQuotes);
 
         // find the post by id and get the views

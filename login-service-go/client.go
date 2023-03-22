@@ -28,31 +28,4 @@ func main() {
 
 	// Run the server on port 9595
 	r.Run(":9595")
-
-	//// Test Login
-	////loginRequest := &pb.LoginRequest{
-	////	Email:    "olow1@gmail.com",
-	////	Password: "123",
-	////}
-	////ctx, cancel := context.WithTimeout(context.Background(), time.Second)
-	////defer cancel()
-	////loginResponse, err := client.Login(ctx, loginRequest)
-	////if err != nil {
-	////	log.Fatalf("could not login: %v", err)
-	////}
-	////log.Printf("Received token: %s", loginResponse.GetToken())
-	//
-	//// Test Register
-	//registerRequest := &pb.RegisterRequest{
-	//	Username: "saleban",
-	//	Password: "123",
-	//	Email:    "olow@example.com",
-	//}
-	//ctx, cancel := context.WithTimeout(context.Background(), time.Second)
-	//defer cancel()
-	//registerResponse, err := client.Register(ctx, registerRequest)
-	//if err != nil {
-	//	log.Fatalf("could not register: %v", err)
-	//}
-	//log.Printf("Received message: %s", registerResponse.GetMessage())
 }
