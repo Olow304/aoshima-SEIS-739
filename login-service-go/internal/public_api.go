@@ -2,6 +2,7 @@ package internal
 
 import (
 	"context"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	pb "github.com/olow304/login-service-go/authservice"
 	"net/http"
@@ -26,6 +27,8 @@ func RegisterUser(router *gin.Engine, client pb.AuthServiceClient) {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
 		}
+
+		fmt.Println(user, "user")
 
 		// Call gRPC client to register user
 		response, err := client.Register(context.Background(), &pb.RegisterRequest{
@@ -53,6 +56,8 @@ func LoginUser(router *gin.Engine, client pb.AuthServiceClient) {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
 		}
+
+		fmt.Println(user, "user22")
 
 		// Call gRPC client to register user
 		response, err := client.Login(context.Background(), &pb.LoginRequest{

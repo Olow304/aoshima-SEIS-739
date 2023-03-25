@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	pb "github.com/olow304/login-service-go/authservice"
 	api "github.com/olow304/login-service-go/internal"
@@ -21,6 +22,13 @@ func main() {
 
 	// Create Gin router
 	r := gin.Default()
+
+	// Add CORS middleware
+	config := cors.DefaultConfig()
+	config.AllowOrigins = []string{"http://localhost:3000"} // Allow requests from your Next.js app
+	config.AllowMethods = []string{"POST"}                  // Allow specific HTTP methods
+	config.AllowHeaders = []string{"Content-Type"}          // Allow specific headers
+	r.Use(cors.New(config))
 
 	// Register user endpoint
 	api.RegisterUser(r, client)
