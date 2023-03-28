@@ -2,9 +2,21 @@
 import { useEffect, useState } from 'react';
 import {useRouter} from "next/navigation";
 
+import { PageRequest } from '@/proto/PageService_pb';
+import { client, withAuthInterceptor } from '@/grpc/grpc-client';
+
+import {useForm} from "react-hook-form";
+
+type FormData = {
+    title: string;
+    content: string;
+};
+
+
 const Home = () => {
     const router = useRouter();
     const [isMounted, setIsMounted] = useState(false);
+    const { register, handleSubmit, setValue } = useForm();
 
     useEffect(() => {
         if (!localStorage.getItem('token')) {
@@ -13,6 +25,22 @@ const Home = () => {
             setIsMounted(true);
         }
     }, []);
+
+    const onSubmit = (data: any) => {
+        const request = new PageRequest();
+        request.setTitle(data.title);
+        request.setContent(data.content);
+
+        withAuthInterceptor(client, 'createPage', request, (err: any, response: any) => {
+            if (err) {
+                console.error("Error: ", err);
+            } else {
+                console.log("Page created: ", response.toObject());
+                setValue('title', '');
+                setValue('content', '');
+            }
+        });
+    };
 
     const logout = () => {
         localStorage.removeItem('token');
@@ -30,6 +58,16 @@ const Home = () => {
             <div>
                 <button onClick={logout}>Logout</button>
             </div>
+
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <label htmlFor="title">Title:</label>
+                <input id="title" type="text" {...register('title')} />
+
+                <label htmlFor="content">Content:</label>
+                <textarea id="content" {...register('content')} />
+
+                <button type="submit">Create Page</button>
+            </form>
         </main>
     );
 };
