@@ -15,6 +15,9 @@ We are planning to develop an easy-to-use content management system (CMS) that w
 
 ![Image description](./images/img.png)
 
+#### Class diagram
+![Image description](./diagrams/class_diagram/class-diagram.png)
+
 
 ### Why gRPC?
 gRPC is a modern open source high performance RPC framework that can run in any environment. It can efficiently connect services in and across data centers with pluggable support for load balancing, tracing, health checking and authentication. It is also a flexible framework that can be used in many different environments: from clients to servers to in-process communication between applications. It is also a great tool for microservices architecture.
