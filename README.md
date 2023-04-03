@@ -9,9 +9,13 @@ We are planning to develop an easy-to-use content management system (CMS) that w
 
 ### Project Directories & Structure
 - <strong>grpc-cms-server-java</strong>: The server side of the project. It is written in Java and uses gRPC for communication.
+- <strong>grpc-client-service</strong>: This is gRPC server stub in Nodejs.
 - <strong>login-service-go</strong>: The login service of the project. It is written in Go and uses gRPC for communication with the server. It's generated using the gRPC-Go plugin.
 - <strong>analytic-service-js</strong>: The analytic service of the project. It is written in JavaScript and uses gRPC for communication with the server. It's generated using the gRPC-Node plugin.
 - <strong>cms-client-app</strong>: This is the frontend of the project, it's using Nextjs and will be using all the services to provide a complete CMS experience.
+
+##### Note:
+Instead of employing a proxy for communication between the gRPC HTTP/2 client side and the server, I encountered numerous issues while configuring the Envoy proxy. As an alternative, I developed a Node.js application that utilizes the server stub to establish a connection with the frontend. <strong>grpc-client-service</strong>
 
 ![Image description](./images/img.png)
 
