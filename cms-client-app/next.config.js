@@ -1,8 +1,20 @@
-/** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
     appDir: true,
   },
-}
+  webpack: (config, options) => {
+    config.module.rules.push({
+      test: /\.proto$/,
+      use: [
+        options.defaultLoaders.babel,
+        {
+          loader: 'raw-loader',
+        },
+      ],
+    });
 
-module.exports = nextConfig
+    return config;
+  },
+};
+
+module.exports = nextConfig;

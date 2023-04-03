@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
-const port = process.env.PORT || 3001;
+const port = 3001;
 
 // Import your gRPC client
 const { getPostCount, getPostViews } = require('./grpc-client');

@@ -1,0 +1,49 @@
+
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.olow.grpccms.grpccms.grpc";
+option java_outer_classname = "PageServiceProto";
+package pageservice;
+
+service GrpcCmsService {
+    rpc createPage (PageRequest) returns (PageResponse) {}
+    rpc updatePage (PageRequest) returns (PageResponse) {}
+    rpc deletePage (PageRequest) returns (PageResponse) {}
+    //get page by id
+    rpc getPage (PageRequest) returns (PageResponse) {}
+    //get all pages
+    rpc getAllPages (EmptyRequest) returns (AllPagesResponse) {}
+
+    // validate if email exists in db
+    rpc validateEmail (EmailRequest) returns (EmailResponse) {}
+}
+
+message EmailRequest {
+    string email = 1;
+}
+
+message EmailResponse {
+    bool emailExists = 1;
+}
+
+message PageRequest {
+    int32 id = 1;
+    string title = 2;
+    string content = 3;
+}
+
+message PageResponse {
+    int32 id = 1;
+    string title = 2;
+    string content = 3;
+    int32 pageview = 4;
+}
+
+message AllPagesResponse {
+    repeated PageResponse pages = 1;
+}
+
+message EmptyRequest {
+}
+

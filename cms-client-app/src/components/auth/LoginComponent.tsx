@@ -19,26 +19,24 @@ const LoginComponent = () => {
     }, []);
 
 
-    const onSubmit = async (data) => {
+    const onSubmit = async (data: any) => {
         // Log data submitted from the form
-        console.log(data);
-
         try {
             const response = await loginHandler(
                 {method: 'POST', body: data},
                 {
-                    status(statusCode) {
+                    status(statusCode: any) {
                         this.statusCode = statusCode;
                         return this;
                     },
-                    json(data) {
+                    json(data: any) {
                         this.data = data;
                         return this;
                     },
                 },
             );
 
-            if (response.status === 200 && response.token) {
+            if (response && response.status === 200 && response.token) {
                 // Store the token in localStorage
                 localStorage.setItem('token', response.token);
                 router.push("/")
@@ -46,7 +44,7 @@ const LoginComponent = () => {
 
             console.log('In LoginComponent.tsx, line: 37 ', response);
 
-        } catch (error) {
+        } catch (error: any) {
             console.error('Error:', error);
         }
     };

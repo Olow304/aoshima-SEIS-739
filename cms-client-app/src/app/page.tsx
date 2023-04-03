@@ -3,9 +3,11 @@ import { useEffect, useState } from 'react';
 import {useRouter} from "next/navigation";
 
 import { PageRequest } from '@/proto/PageService_pb';
-import { client, withAuthInterceptor } from '@/grpc/grpc-client';
 
 import {useForm} from "react-hook-form";
+//import {withAuthInterceptor} from "@/grpc/grpc-client";
+import {grpc} from "@improbable-eng/grpc-web";
+import client = grpc.client;
 
 type FormData = {
     title: string;
@@ -27,20 +29,21 @@ const Home = () => {
     }, []);
 
     const onSubmit = (data: any) => {
-        const request = new PageRequest();
-        request.setTitle(data.title);
-        request.setContent(data.content);
-
-        withAuthInterceptor(client, 'createPage', request, (err: any, response: any) => {
-            if (err) {
-                console.error("Error: ", err);
-            } else {
-                console.log("Page created: ", response.toObject());
-                setValue('title', '');
-                setValue('content', '');
-            }
-        });
+        // const request = new PageRequest();
+        // request.setTitle(data.title);
+        // request.setContent(data.content);
+        //
+        // withAuthInterceptor(client, 'createPage', request, (err: any, response: any) => {
+        //     if (err) {
+        //         console.error("Error: ", err);
+        //     } else {
+        //         console.log("Page created: ", response.toObject());
+        //         setValue('title', '');
+        //         setValue('content', '');
+        //     }
+        // });
     };
+
 
     const logout = () => {
         localStorage.removeItem('token');

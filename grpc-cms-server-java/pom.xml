@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.olow.grpc-cms</groupId>
 	<artifactId>grpc-cms-server-java</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>beta</version>
 	<name>grpc-cms</name>
 	<description>gRPC cms service</description>
 	<properties>

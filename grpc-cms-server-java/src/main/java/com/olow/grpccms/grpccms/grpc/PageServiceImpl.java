@@ -22,11 +22,12 @@ public class PageServiceImpl extends GrpcCmsServiceGrpc.GrpcCmsServiceImplBase {
     @Override
     public void createPage(PageRequest request, io.grpc.stub.StreamObserver<PageResponse> responseObserver) {
         // Convert the request to a Page entity
+        System.out.println("newPage: " + request);
         Page newPage = new Page();
         newPage.setTitle(request.getTitle());
         newPage.setContent(request.getContent());
 
-        System.out.println("newPage: " + request);
+
         //System.out.println("newPage: " + newPage.getId());
 
         // Save the new Page entity using the PageRepository

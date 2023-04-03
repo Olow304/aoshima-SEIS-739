@@ -15,29 +15,28 @@ const RegisterComponent = () => {
         setDomLoaded(true);
     }, []);
 
-    const onSubmit = async (data) => {
+    const onSubmit = async (data: any) => {
         try {
             const response = await registerHandler(
                 { method: 'POST', body: data },
                 {
-                    status(statusCode) {
+                    status(statusCode: any) {
                         this.statusCode = statusCode;
                         return this;
                     },
-                    json(data) {
+                    json(data: any) {
                         this.data = data;
                         return this;
                     },
                 },
             );
 
-            if (response.message === "User registered successfully") {
+            if (response && response.message === "User registered successfully") {
                 router.push("/login")
             }
 
-            console.log('In RegisterComponent.tsx, line: 37 ', response);
 
-        } catch (error) {
+        } catch (error: any) {
             console.error('Error:', error);
         }
     };
