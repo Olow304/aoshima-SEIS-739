@@ -1,51 +1,44 @@
-version: "3.9"
+# version: "3.9"
 
-services:
-  postgres:
-    image: postgres:13
-    container_name: postgres
-    environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: mydb
-    volumes:
-      - db-data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
+# services:
+#   grpc-client-service:
+#     build: ./grpc-client-nodejs
+#     image: olow/grpc-client-service:latest
 
-  grpc-client-service:
-    build: ./grpc-client-nodejs
-    image: olow/grpc-client-service:latest
-    depends_on:
-      - postgres
+#   analytic-service-js:
+#     build: ./analytic-service-js
+#     image: olow/analytic-service-js:latest
 
-  analytic-service-js:
-    build: ./analytic-service-js
-    image: olow/analytic-service-js:latest
-    depends_on:
-      - postgres
+#   login-service-go:
+#     build: ./login-service-go
+#     image: olow/login-service-go:latest
 
-  grpc-cms-server-java:
-    build: ./grpc-cms-server-java
-    image: olow/grpc-cms-server-java:latest
-    depends_on:
-      - postgres
+#   # grpc-cms-server-java:
+#   #   build: ./grpc-cms-server-java
+#   #   image: olow/grpc-cms-server-java:latest
+#   #   depends_on:
+#   #     - postgres
 
-  login-service-go:
-    build: ./login-service-go
-    image: olow/login-service-go:latest
-    depends_on:
-      - postgres
-    ports:
-      - "9595:9595"
+#   # comment out cms-client-app section if you are building on dev
+#   # cms-client-app:
+#   #   build: .
+#   #   image: olow/cms-client-app:latest
+#   #   ports:
+#   #     - "3000:3000"
+#   #   depends_on:
+#   #     - postgres
 
-  cms-client-app:
-    build: .
-    image: olow/cms-client-app:latest
-    ports:
-      - "3000:3000"
-    depends_on:
-      - postgres
+#   # postgres:
+#   #   image: postgres:13
+#   #   container_name: postgres
+#   #   environment:
+#   #     POSTGRES_USER: user
+#   #     POSTGRES_PASSWORD: password
+#   #     POSTGRES_DB: mydb
+#   #   volumes:
+#   #     - db-data:/var/lib/postgresql/data
+#   #   ports:
+#   #     - "5432:5432"
 
-volumes:
-  db-data:
+# # volumes:
+# #   db-data:

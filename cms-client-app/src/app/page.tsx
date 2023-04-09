@@ -1,13 +1,15 @@
 "use client"
 import { useEffect, useState } from 'react';
 import {useRouter} from "next/navigation";
-
+import fetchPostCount from "./api/post-api/fetchPostsStats";
+import createPost from "./api/create-post/CreatePost";
 import { PageRequest } from '@/proto/PageService_pb';
 
 import {useForm} from "react-hook-form";
 //import {withAuthInterceptor} from "@/grpc/grpc-client";
 import {grpc} from "@improbable-eng/grpc-web";
 import client = grpc.client;
+import loginHandler from "@/app/api/auth-api/loginAPI";
 
 type FormData = {
     title: string;
@@ -19,6 +21,9 @@ const Home = () => {
     const router = useRouter();
     const [isMounted, setIsMounted] = useState(false);
     const { register, handleSubmit, setValue } = useForm();
+    const [numberOfPosts, setNumberOfPosts] = useState(0);
+
+    const ANALYTICS_URL = 'http://localhost:3001';
 
     useEffect(() => {
         if (!localStorage.getItem('token')) {
@@ -28,20 +33,52 @@ const Home = () => {
         }
     }, []);
 
-    const onSubmit = (data: any) => {
-        // const request = new PageRequest();
-        // request.setTitle(data.title);
-        // request.setContent(data.content);
-        //
-        // withAuthInterceptor(client, 'createPage', request, (err: any, response: any) => {
-        //     if (err) {
-        //         console.error("Error: ", err);
-        //     } else {
-        //         console.log("Page created: ", response.toObject());
-        //         setValue('title', '');
-        //         setValue('content', '');
-        //     }
-        // });
+    useEffect(() => {
+        fetchPostCount().then((response) => {
+            if (response) {
+                setNumberOfPosts(response);
+            }
+        });
+
+    }, []);
+
+    const onSubmit = async (data: any) => {
+        const request = new PageRequest();
+        request.setTitle(data.title);
+        request.setContent(data.content);
+
+        // createPost
+        try {
+            const response = await createPost(
+                {method: 'POST', body: data},
+                {
+                    status(statusCode: any) {
+                        this.statusCode = statusCode;
+                        return this;
+                    },
+                    json(data: any) {
+                        this.data = data;
+                        return this;
+                    },
+                },
+            );
+
+            if (response && response.status === 200 && response.token) {
+                // Store the token in localStorage
+                localStorage.setItem('token', response.token);
+                router.push("/")
+            }
+
+            console.log('In LoginComponent.tsx, line: 37 ', response);
+
+            // reset form
+            setValue('title', '');
+            setValue('content', '');
+
+        } catch (error: any) {
+            console.error('Error:', error);
+        }
+
     };
 
 
@@ -60,6 +97,10 @@ const Home = () => {
 
             <div>
                 <button onClick={logout}>Logout</button>
+            </div>
+
+            <div>
+                <p>Number of posts: {numberOfPosts}</p>
             </div>
 
             <form onSubmit={handleSubmit(onSubmit)}>
