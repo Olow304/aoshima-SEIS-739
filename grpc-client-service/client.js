@@ -28,6 +28,19 @@ const authInterceptor = function (options, nextCall) {
 //const client = new protoDesc.analyticservice.AnalyticService('localhost:9090', grpc.credentials.createInsecure(), { interceptors: [authInterceptor] });
 const client = new protoDesc.pageservice.GrpcCmsService('localhost:9090', grpc.credentials.createInsecure(), { interceptors: [authInterceptor] });
 
+// get all pages
+function getAllPages(token) {
+    return new Promise((resolve, reject) => {
+        client.getAllPages({}, { token }, (error, response) => {
+            if (error) {
+                reject(error);
+            } else {
+                resolve(response);
+            }
+        });
+    });
+}
+
 function createPage(title, content, token) {
     return new Promise((resolve, reject) => {
         const pageRequest = {
@@ -80,4 +93,5 @@ module.exports = {
     createPage,
     updatePage,
     deletePage,
+    getAllPages,
 }

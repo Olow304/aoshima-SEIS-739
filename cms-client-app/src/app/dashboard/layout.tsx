@@ -1,11 +1,6 @@
 "use client"
-import React, {Fragment, useEffect, useState} from 'react';
-import {useRouter} from "next/navigation";
-import fetchPostCount from "./api/post-api/fetchPostsStats";
-import createPost from "./api/create-post/CreatePost";
-import { PageRequest } from '@/proto/PageService_pb';
 
-import {useForm} from "react-hook-form";
+import React, {Fragment, useEffect, useState} from "react";
 //import {withAuthInterceptor} from "@/grpc/grpc-client";
 import {grpc} from "@improbable-eng/grpc-web";
 import client = grpc.client;
@@ -21,13 +16,17 @@ import {
     XMarkIcon,
 } from '@heroicons/react/24/outline'
 import { Bars3Icon, ChevronRightIcon, ChevronUpDownIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
-import DashboardStatus from "@/components/dashboardStatus/DashboardStatus";
+import { useRouter } from 'next/router';
+import { usePathname } from 'next/navigation';
+
+
+
 
 
 const navigation = [
-    { name: 'Dashboard', href: '#', icon: FolderIcon, current: false },
-    { name: 'Pages', href: 'dashboard/pages', icon: ServerIcon, current: false },
-    { name: 'Profile', href: 'dashboard/profile', icon: SignalIcon, current: false },
+    { name: 'Dashboard', href: '/', icon: FolderIcon, current: false },
+    { name: 'Pages', href: 'pages', icon: ServerIcon, current: false },
+    { name: 'Profile', href: 'profile', icon: SignalIcon, current: false },
     { name: 'Settings', href: '#', icon: GlobeAltIcon, current: false },
     { name: 'Logout', href: '#', icon: ChartBarSquareIcon, current: false },
 ]
@@ -36,88 +35,23 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
-type FormData = {
-    title: string;
-    content: string;
-};
-
-
-const Home = () => {
-    const router = useRouter();
-    const [isMounted, setIsMounted] = useState(false);
-    const { register, handleSubmit, setValue } = useForm();
-    const [numberOfPosts, setNumberOfPosts] = useState(0);
+export default function DashboardLayout({children, params}: {
+    children: React.ReactNode,
+}) {
     const [sidebarOpen, setSidebarOpen] = useState(false)
-
-    const ANALYTICS_URL = 'http://localhost:3001';
-
-    useEffect(() => {
-        if (!localStorage.getItem('token')) {
-            router.push('/login');
-        } else {
-            setIsMounted(true);
-        }
-    }, []);
-
-    useEffect(() => {
-        fetchPostCount().then((response) => {
-            if (response) {
-                setNumberOfPosts(response);
-            }
-        });
-
-    }, []);
-
-    const onSubmit = async (data: any) => {
-        const request = new PageRequest();
-        request.setTitle(data.title);
-        request.setContent(data.content);
-
-        // createPost
-        try {
-            const response = await createPost(
-                {method: 'POST', body: data},
-                {
-                    status(statusCode: any) {
-                        this.statusCode = statusCode;
-                        return this;
-                    },
-                    json(data: any) {
-                        this.data = data;
-                        return this;
-                    },
-                },
-            );
-
-            if (response && response.status === 200 && response.token) {
-                // Store the token in localStorage
-                localStorage.setItem('token', response.token);
-                router.push("/")
-            }
-
-            console.log('In LoginComponent.tsx, line: 37 ', response);
-
-            // reset form
-            setValue('title', '');
-            setValue('content', '');
-
-        } catch (error: any) {
-            console.error('Error:', error);
-        }
-
-    };
+    const [currentPath, setCurrentPath] = useState('')
+    const searchParams = usePathname();
 
 
-    const logout = () => {
-        localStorage.removeItem('token');
-        router.push('/login');
-    };
-
-    if (!isMounted) {
-        return null;
-    }
+    console.log("path: ", searchParams)
 
     return (
+        // <section className="bg-red-500">
+        //     {/* Include shared UI here e.g. a header or sidebar */}
+        //     <nav></nav>
+        //
+        //     {children}
+        // </section>
         <>
             <div className="bg-[#fdfdfd] h-full">
                 <Transition.Root show={sidebarOpen} as={Fragment}>
@@ -249,13 +183,18 @@ const Home = () => {
                 <div className="xl:pl-72">
                     <main className="text-gray-700">
                         <header className="flex items-center justify-between border-b border-white/5 px-4 py-4 sm:px-6 sm:py-6 lg:px-8">
-                            <h1 className="text-base font-semibold leading-7 ">Dashboard</h1>
+                            <h1 className="text-base font-semibold leading-7 ">
+                                {/*get the url from the navigation and display it here*/}
+                                Application
+
+                            </h1>
                         </header>
 
                         {/* Deployment list */}
                         <div className="px-4 sm:px-6 lg:px-8">
                             {/*Show components based on the navigation name*/}
-                                <DashboardStatus />
+                            {children}
+
                         </div>
                     </main>
 
@@ -264,6 +203,4 @@ const Home = () => {
             </div>
         </>
     );
-};
-
-export default Home;
+}

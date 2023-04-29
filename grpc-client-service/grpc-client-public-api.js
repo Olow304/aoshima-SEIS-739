@@ -3,7 +3,7 @@ const cors = require('cors');
 const app = express();
 const port = 4000;
 
-const { createPage, updatePage, deletePage } = require('./client');
+const { createPage, updatePage, deletePage, getAllPages } = require('./client');
 
 app.use(cors());
 app.use(express.json());
@@ -13,6 +13,20 @@ app.post('/api/create-page', async (req, res) => {
         const { title, content } = req.body;
         if (req.headers.authorization) {
             const response = await createPage(title, content, req.headers.authorization);
+            res.status(200).json(response);
+        } else {
+            res.status(401).json({ error: 'Unauthorized' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+})
+
+// get all pages
+app.get('/api/get-pages', async (req, res) => {
+    try {
+        if (req.headers.authorization) {
+            const response = await getAllPages(req.headers.authorization);
             res.status(200).json(response);
         } else {
             res.status(401).json({ error: 'Unauthorized' });

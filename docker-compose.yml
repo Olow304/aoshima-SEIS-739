@@ -1,13 +1,13 @@
-# version: "3.9"
+version: "3.9"
 
-# services:
-#   grpc-client-service:
-#     build: ./grpc-client-nodejs
-#     image: olow/grpc-client-service:latest
+services:
+  grpc-client-service:
+    build: ./grpc-client-nodejs
+    image: olow/grpc-client-service:latest
 
-#   analytic-service-js:
-#     build: ./analytic-service-js
-#     image: olow/analytic-service-js:latest
+  analytic-service-js:
+    build: ./analytic-service-js
+    image: olow/analytic-service-js:latest
 
 #   login-service-go:
 #     build: ./login-service-go
