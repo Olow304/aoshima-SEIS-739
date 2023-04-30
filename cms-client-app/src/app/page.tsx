@@ -22,14 +22,18 @@ import {
 } from '@heroicons/react/24/outline'
 import { Bars3Icon, ChevronRightIcon, ChevronUpDownIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import DashboardStatus from "@/components/dashboardStatus/DashboardStatus";
-
+import { MdOutlineDashboard } from 'react-icons/md';
+import { RiBookReadLine } from 'react-icons/ri'
+import { IoMdPerson } from 'react-icons/io'
+import { IoMdSettings } from 'react-icons/io'
+import { FiLogOut } from 'react-icons/fi'
 
 const navigation = [
-    { name: 'Dashboard', href: '#', icon: FolderIcon, current: false },
-    { name: 'Pages', href: 'dashboard/pages', icon: ServerIcon, current: false },
-    { name: 'Profile', href: 'dashboard/profile', icon: SignalIcon, current: false },
-    { name: 'Settings', href: '#', icon: GlobeAltIcon, current: false },
-    { name: 'Logout', href: '#', icon: ChartBarSquareIcon, current: false },
+    { name: 'Dashboard', href: '#', icon: MdOutlineDashboard, current: false },
+    { name: 'Pages', href: 'dashboard/pages', icon: RiBookReadLine, current: false },
+    { name: 'Profile', href: 'dashboard/profile', icon: IoMdPerson, current: false },
+    { name: 'Settings', href: '#', icon: IoMdSettings, current: false },
+    { name: 'Logout', href: '', icon: FiLogOut, current: false },
 ]
 
 function classNames(...classes) {
@@ -67,6 +71,14 @@ const Home = () => {
         });
 
     }, []);
+
+    const handleLogout = (event) => {
+        event.preventDefault();
+        localStorage.removeItem('token');
+        //router.push('/login');
+        window.location.href = '/login';
+    };
+
 
     const onSubmit = async (data: any) => {
         const request = new PageRequest();
@@ -175,10 +187,10 @@ const Home = () => {
                                                 <li>
                                                     <ul role="list" className="-mx-2 space-y-1">
                                                         {navigation.map((item) => (
-                                                            // check if the link is logout, assign the logout function to the onClick event
                                                             <li key={item.name}>
                                                                 <a
                                                                     href={item.href}
+                                                                    onClick={item.name === 'Logout' ? handleLogout : undefined}
                                                                     className={classNames(
                                                                         item.current
                                                                             ? 'bg-gray-800 text-white'
@@ -190,7 +202,6 @@ const Home = () => {
                                                                     {item.name}
                                                                 </a>
                                                             </li>
-
                                                         ))}
                                                     </ul>
                                                 </li>
@@ -215,7 +226,7 @@ const Home = () => {
                             {/*    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"*/}
                             {/*    alt="Your Company"*/}
                             {/*/>*/}
-                            <h1 className="text-2xl text-white">Your Company</h1>
+                            <h1 className="text-2xl text-white">Aoshima <span className="text-sm">CMS</span></h1>
                         </div>
                         <nav className="flex flex-1 flex-col">
                             <ul role="list" className="flex flex-1 flex-col gap-y-7">
@@ -225,6 +236,7 @@ const Home = () => {
                                             <li key={item.name}>
                                                 <a
                                                     href={item.href}
+                                                    onClick={item.name === 'Logout' ? handleLogout : undefined}
                                                     className={classNames(
                                                         item.current
                                                             ? 'bg-gray-800 text-white'

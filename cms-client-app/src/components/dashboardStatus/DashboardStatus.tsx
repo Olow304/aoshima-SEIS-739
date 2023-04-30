@@ -1,10 +1,12 @@
 import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/20/solid'
 import { CursorArrowRaysIcon, EnvelopeOpenIcon, UsersIcon } from '@heroicons/react/24/outline'
+import { RiBookReadLine } from 'react-icons/ri'
+import { AiFillEye } from 'react-icons/ai'
 
 const stats = [
-    { id: 1, name: 'Total Pages', stat: '10', icon: UsersIcon, change: '2', changeType: 'increase' },
-    { id: 2, name: 'Number of Views', stat: '11.6K', icon: EnvelopeOpenIcon, change: '12.4%', changeType: 'increase' },
-    { id: 3, name: 'Avg. Page View', stat: '1.3k', icon: CursorArrowRaysIcon, change: '1.2%', changeType: 'decrease' },
+    { id: 1, name: 'Total Pages', stat: '10', icon: RiBookReadLine, change: '2', changeType: 'increase' },
+    { id: 2, name: 'Number of Views', stat: '11.6K', icon: AiFillEye, change: '12.4%', changeType: 'increase' },
+    { id: 3, name: 'Avg. Page View', stat: '1.3k', icon: AiFillEye, change: '1.2%', changeType: 'decrease' },
 ]
 
 function classNames(...classes) {

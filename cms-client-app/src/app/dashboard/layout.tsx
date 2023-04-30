@@ -22,14 +22,14 @@ import { usePathname } from 'next/navigation';
 
 
 
-
 const navigation = [
     { name: 'Dashboard', href: '/', icon: FolderIcon, current: false },
     { name: 'Pages', href: 'pages', icon: ServerIcon, current: false },
     { name: 'Profile', href: 'profile', icon: SignalIcon, current: false },
     { name: 'Settings', href: '#', icon: GlobeAltIcon, current: false },
-    { name: 'Logout', href: '#', icon: ChartBarSquareIcon, current: false },
+    { name: 'Logout', href: 'logout', icon: ChartBarSquareIcon, current: false },
 ]
+
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -41,6 +41,20 @@ export default function DashboardLayout({children, params}: {
     const [sidebarOpen, setSidebarOpen] = useState(false)
     const [currentPath, setCurrentPath] = useState('')
     const searchParams = usePathname();
+
+    useEffect(() => {
+        if (!localStorage.getItem('token')) {
+            window.location.href = '/login';
+        }
+    }, []);
+
+    const handleLogout = (event) => {
+        event.preventDefault();
+        localStorage.removeItem('token');
+        //router.push('/login');
+        window.location.href = '/login';
+    };
+
 
 
     console.log("path: ", searchParams)
@@ -109,10 +123,10 @@ export default function DashboardLayout({children, params}: {
                                                 <li>
                                                     <ul role="list" className="-mx-2 space-y-1">
                                                         {navigation.map((item) => (
-                                                            // check if the link is logout, assign the logout function to the onClick event
                                                             <li key={item.name}>
                                                                 <a
                                                                     href={item.href}
+                                                                    onClick={item.name === 'Logout' ? handleLogout : undefined}
                                                                     className={classNames(
                                                                         item.current
                                                                             ? 'bg-gray-800 text-white'
@@ -124,7 +138,6 @@ export default function DashboardLayout({children, params}: {
                                                                     {item.name}
                                                                 </a>
                                                             </li>
-
                                                         ))}
                                                     </ul>
                                                 </li>
@@ -149,7 +162,7 @@ export default function DashboardLayout({children, params}: {
                             {/*    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"*/}
                             {/*    alt="Your Company"*/}
                             {/*/>*/}
-                            <h1 className="text-2xl text-white">Your Company</h1>
+                            <h1 className="text-2xl text-white">Aoshima <span className="text-sm">CMS</span></h1>
                         </div>
                         <nav className="flex flex-1 flex-col">
                             <ul role="list" className="flex flex-1 flex-col gap-y-7">
@@ -159,6 +172,7 @@ export default function DashboardLayout({children, params}: {
                                             <li key={item.name}>
                                                 <a
                                                     href={item.href}
+                                                    onClick={item.name === 'Logout' ? handleLogout : undefined}
                                                     className={classNames(
                                                         item.current
                                                             ? 'bg-gray-800 text-white'
