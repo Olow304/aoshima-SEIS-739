@@ -51,42 +51,6 @@ const LoginComponent = () => {
 
     return (
         <>
-            {/*{domLoaded && (*/}
-            {/*    <div className="login">*/}
-            {/*        <h1>Log In</h1>*/}
-            {/*        {error && <p className="error">{error}</p>}*/}
-            {/*        <form onSubmit={handleSubmit(onSubmit)}>*/}
-            {/*            <div className="form-group">*/}
-            {/*                <label htmlFor="email">Email</label>*/}
-            {/*                <input*/}
-            {/*                    type="email"*/}
-            {/*                    {...register('email', {required: true})}*/}
-            {/*                />*/}
-            {/*                {errors.email && <p>Email is required.</p>}*/}
-            {/*            </div>*/}
-
-            {/*            <div className="form-group">*/}
-            {/*                <label htmlFor="password">Password</label>*/}
-            {/*                <input*/}
-            {/*                    type="password"*/}
-            {/*                    {...register('password', {required: true})}*/}
-            {/*                />*/}
-            {/*                {errors.password && <p>Password is required.</p>}*/}
-            {/*            </div>*/}
-
-            {/*            <div className="form-group">*/}
-            {/*                <button type="submit" disabled={loading}>*/}
-            {/*                    Log In*/}
-            {/*                </button>*/}
-            {/*            </div>*/}
-            {/*        </form>*/}
-
-            {/*        <div className="login-instead">*/}
-            {/*            <Link href="/register">Register now</Link>*/}
-            {/*        </div>*/}
-            {/*    </div>*/}
-            {/*)}*/}
-
             <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">
                 <div className="sm:mx-auto sm:w-full sm:max-w-md">
                     <img
