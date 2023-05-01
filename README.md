@@ -39,6 +39,13 @@ Our objective is to develop microservices that effectively communicate with each
 - Easier client integration: gRPC provides client libraries for various languages, simplifying the interaction between the frontend application (Next.js in this case) and the services. This streamlines the development process and improves the overall user experience in the CMS.
 
 
+### Future work
+- Dockerize
+- Add "View your site" feature, allowing admin to view their contents.
+- Add user as a admin
+- Deployment with kubernetes
+
+
 ### How to run the project
 
 #### grpc-cms-server-java (using Maven):
