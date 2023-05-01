@@ -46,9 +46,9 @@ Our objective is to develop microservices that effectively communicate with each
 - Maven
 
 ```bash
-    cd grpc-cms-server-java
-    mvn clean install
-    mvn exec:java
+cd grpc-cms-server-java
+mvn clean install
+mvn exec:java
 ```
 
 #### login-service-go (Golang):
@@ -56,8 +56,8 @@ Our objective is to develop microservices that effectively communicate with each
 - Go 1.18 or later
 
 ```bash
-    cd login-service-go
-    go build ./login-service-go
+cd login-service-go
+go build ./login-service-go
 ```
 
 #### analytic-service-js (Nodejs):
@@ -65,9 +65,9 @@ Our objective is to develop microservices that effectively communicate with each
 - Node.js 16+ (preferably the latest LTS version)
 
 ```bash
-    cd analytic-service-js
-    npm install
-    node client-api-analytic.js
+cd analytic-service-js
+npm install
+node client-api-analytic.js
 ```
 
 #### grpc-client-service (Nodejs):
@@ -75,15 +75,15 @@ Our objective is to develop microservices that effectively communicate with each
 - Node.js 16+ (preferably the latest LTS version)
 
 ```bash
-    cd grpc-client-service
-    npm install
-    node grpc-client-public-api.js
+cd grpc-client-service
+npm install
+node grpc-client-public-api.js
 ```
 
 #### cms-client-app (Next.js):
 ```bash
-    cd cms-client-app
-    npm install
-    npm run dev
+cd cms-client-app
+npm install
+npm run dev
 ```
 
