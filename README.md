@@ -8,7 +8,7 @@ We are planning to develop an easy-to-use content management system (CMS) that w
 
 
 ### Project Directories & Structure
-- <strong>grpc-cms-server-java</strong>: The server side of the project. It is written in Java and uses gRPC <strong>server</strong> for communication.
+- <strong>grpc-cms-server-java</strong>: This is our main server. It is written in Java and uses gRPC <strong>server</strong> for communication.
 - <strong>grpc-client-service</strong>: This service is using gRPC <strong>client</strong> for communication with the main server. Mainly responsibly handing client crud operation and communicating to the main server.
 - <strong>login-service-go</strong>: The login service of the project. It is written in Go and uses gRPC <strong>client</strong> for communication with the server. It's generated using the gRPC-Go plugin.
 - <strong>analytic-service-js</strong>: The analytic service of the project. It is written in JavaScript and uses gRPC <strong>client</strong> for communication with the server. It's generated using the gRPC-Node plugin.
