@@ -42,6 +42,9 @@ Our objective is to develop microservices that effectively communicate with each
 - Allow admins to log into the platform to access content - Authentication
 - Allow admin to add, edit, and delete content - Crud operation
 
+### Testing
+- We have used Jest for testing our react components, e.g. "if component is render, if text is showing up, etc"
+
 ### Future work
 - Dockerize
 - Add "View your site" feature, allowing admin to view their contents.
