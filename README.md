@@ -20,11 +20,11 @@ We are planning to develop an easy-to-use content management system (CMS) that w
 
 
 ### Why gRPC?
-gRPC is a modern open source high performance RPC framework that can run in any environment. It can efficiently connect services in and across data centers with pluggable support for load balancing, tracing, health checking and authentication. It is also a flexible framework that can be used in many different environments: from clients to servers to in-process communication between applications. It is also a great tool for microservices architecture.
+We chose gRPC because it is a high-performance, open-source, and flexible RPC framework. It can be used in various environments, making it a great tool for microservices architecture.
 
 
 ### Why are we using gRPC?
-Our objective was to develop microservices that effectively communicate with each other and using grpc give us the ability to do that. 
+Our objective is to develop microservices that effectively communicate with each other. gRPC offers several advantages for our project, including:
 
 #### Advantages of gRPC
 - Efficient communication: gRPC provides efficient communication between services, thanks to its use of HTTP/2 and Protocol Buffers. This can lead to better performance and lower resource usage, which is crucial for a CMS that may handle large amounts of data and numerous user interactions.
@@ -40,4 +40,50 @@ Our objective was to develop microservices that effectively communicate with eac
 
 ### How to run the project
 
-I'll dockerize the project and add kubernetes for deployment in the future. Stay tuned!
+#### grpc-cms-server-java (using Maven):
+<strong>Required:</strong><br>
+- Java 11 or later
+- Maven
+
+```bash
+    cd grpc-cms-server-java
+    mvn clean install
+    mvn exec:java
+```
+
+#### login-service-go (Golang):
+<strong>Required:</strong><br>
+- Go 1.18 or later
+
+```bash
+    cd login-service-go
+    go build ./login-service-go
+```
+
+#### analytic-service-js (Nodejs):
+<strong>Required:</strong><br>
+- Node.js 16+ (preferably the latest LTS version)
+
+```bash
+    cd analytic-service-js
+    npm install
+    node client-api-analytic.js
+```
+
+#### grpc-client-service (Nodejs):
+<strong>Required:</strong><br>
+- Node.js 16+ (preferably the latest LTS version)
+
+```bash
+    cd grpc-client-service
+    npm install
+    node grpc-client-public-api.js
+```
+
+#### cms-client-app (Next.js):
+```bash
+    cd cms-client-app
+    npm install
+    npm run dev
+```
+
