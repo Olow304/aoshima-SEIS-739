@@ -8,9 +8,10 @@ We are planning to develop an easy-to-use content management system (CMS) that w
 
 
 ### Project Directories & Structure
-- <strong>grpc-cms-server-java</strong>: The server side of the project. It is written in Java and uses gRPC for communication.
-- <strong>login-service-go</strong>: The login service of the project. It is written in Go and uses gRPC for communication with the server. It's generated using the gRPC-Go plugin.
-- <strong>analytic-service-js</strong>: The analytic service of the project. It is written in JavaScript and uses gRPC for communication with the server. It's generated using the gRPC-Node plugin.
+- <strong>grpc-cms-server-java</strong>: The server side of the project. It is written in Java and uses gRPC <strong>server</strong> for communication.
+- <strong>grpc-client-service</strong>: This service is using gRPC <strong>client</strong> for communication with the main server. Mainly responsibly handing client crud operation and communicating to the main server.
+- <strong>login-service-go</strong>: The login service of the project. It is written in Go and uses gRPC <strong>client</strong> for communication with the server. It's generated using the gRPC-Go plugin.
+- <strong>analytic-service-js</strong>: The analytic service of the project. It is written in JavaScript and uses gRPC <strong>client</strong> for communication with the server. It's generated using the gRPC-Node plugin.
 - <strong>cms-client-app</strong>: This is the frontend of the project, it's using Nextjs and will be using all the services to provide a complete CMS experience.
 
 ![Image description](./images/new_diagram.png)
